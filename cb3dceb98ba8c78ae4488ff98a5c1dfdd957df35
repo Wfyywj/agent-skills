@@ -1,0 +1,36 @@
+README.md
+  d873ca9d2551cc53 5-12
+docs/research/2026-10-23-fullstack-workflow.md
+  d873ca9d2551cc53 1-280
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.9",
+  "base_commit_sha": "cb3dceb98ba8c78ae4488ff98a5c1dfdd957df35",
+  "prompts": {
+    "d873ca9d2551cc53": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10493-9bb8-7160-b8eb-1aa332eb739a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "wangguixiang",
+      "messages": [],
+      "total_additions": 292,
+      "total_deletions": 4,
+      "accepted_lines": 288,
+      "overriden_lines": 0,
+      "per_file_stats": {
+        "docs/research/2026-10-23-fullstack-workflow.md": {
+          "additions": 284,
+          "deletions": 4,
+          "accepted_lines": 280
+        },
+        "README.md": {
+          "additions": 8,
+          "accepted_lines": 8
+        }
+      }
+    }
+  }
+}
