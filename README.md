@@ -92,6 +92,21 @@ $deliver-change 汇总当前改动和验证结果，本次只做本地交付，�
 
 ## 验证范围与来源
 
+GitHub Actions 在 push、PR 和手动触发时执行两项检查，任一失败都会让 CI 失败：
+
+- 技能格式：六个节点必须存在，并用 Agent Skills 参考校验器检查所有技能目录的 YAML 元数据、名称和目录匹配等规则。
+- 文档链接：用 lychee 离线检查 Markdown 中的本地文件链接与标题锚点；外部 HTTP(S) 链接的网络可达性不在本次 CI 范围内。
+
+本地复现：在 Python 3.11+ 的虚拟环境中安装校验依赖，并准备 [lychee v0.24.2](https://github.com/lycheeverse/lychee/releases/tag/lychee-v0.24.2)，然后在仓库根目录运行：
+
+```bash
+python -m pip install -r requirements-ci.txt
+python scripts/check_skills.py
+lychee --offline --include-fragments --no-progress './**/*.md'
+```
+
+[CI 配置](.github/workflows/ci.yml)和[检查脚本](scripts/check_skills.py)都在仓库中。它们检查文件格式与链接，不执行开发任务，也不能证明技能的交付效果。
+
 这套技能不绑定模型厂商，但读取技能、执行工具和实际交付效果是三件事，不能据格式兼容承诺任意模型效果相同。新技术栈优先沿用目标项目的版本和工具，不自动安装调研中的候选项目。
 
 [开源调研与选型依据](docs/research/2026-10-23-fullstack-workflow.md)保留当时的来源与取舍；本 README 描述当前实现。技能为独立编写，没有复制第三方脚本或引入其运行时。
