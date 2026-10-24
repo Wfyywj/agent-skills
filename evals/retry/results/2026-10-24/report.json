@@ -1,0 +1,608 @@
+{
+  "experiment": "retry-context-ablation",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "harness": "Codex collaboration, fork_turns=none; only the prepared prompt is supplied",
+  "trials_per_arm": 1,
+  "manifest_sha256": "602c7cccacc1bd15c258e4dc83a9371d4405c777e8df304865fd314be5e885f6",
+  "conditions": {
+    "baseline": {
+      "candidate_sha256": "a02a909d8266ba1dc6cd8c8f914b8b1f34cedece34591078915bb241867e4da6",
+      "scores": {
+        "development": {
+          "passed": 3,
+          "total": 3
+        },
+        "holdout": {
+          "passed": 17,
+          "total": 17
+        }
+      },
+      "grade_wall_seconds": 0.0825,
+      "candidate_error": null,
+      "cases": [
+        {
+          "id": "single-success",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "temporary-read",
+          "split": "development",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-write-timeout",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 90,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "permanent-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unlisted-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "attempt-limit",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "inner-retry-owner",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "budget-before-wait",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 80,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "clip-attempt-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 75,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "safe-timeout-deduplicated",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "uncertainty-persists",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "no-budget",
+          "split": "holdout",
+          "passed": true,
+          "calls": 0,
+          "elapsed_ms": 0,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "throttled-read",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-temporary-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "created-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "last-2xx-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "bad-gateway",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "gateway-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "one-attempt-only",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "third-attempt-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 3,
+          "elapsed_ms": 55,
+          "side_effects": 0,
+          "errors": []
+        }
+      ]
+    },
+    "workflow": {
+      "candidate_sha256": "2e5bee9f45668909a08e0c896c7fd9b887c92b03cd4eab31cb5901469e962010",
+      "scores": {
+        "development": {
+          "passed": 3,
+          "total": 3
+        },
+        "holdout": {
+          "passed": 17,
+          "total": 17
+        }
+      },
+      "grade_wall_seconds": 0.0843,
+      "candidate_error": null,
+      "cases": [
+        {
+          "id": "single-success",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "temporary-read",
+          "split": "development",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-write-timeout",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 90,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "permanent-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unlisted-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "attempt-limit",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "inner-retry-owner",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "budget-before-wait",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 80,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "clip-attempt-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 75,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "safe-timeout-deduplicated",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "uncertainty-persists",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "no-budget",
+          "split": "holdout",
+          "passed": true,
+          "calls": 0,
+          "elapsed_ms": 0,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "throttled-read",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-temporary-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "created-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "last-2xx-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "bad-gateway",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "gateway-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "one-attempt-only",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "third-attempt-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 3,
+          "elapsed_ms": 55,
+          "side_effects": 0,
+          "errors": []
+        }
+      ]
+    },
+    "experience": {
+      "candidate_sha256": "c3d49793147053f1f06152d9df40f9208db62514700e5463fcd76ddf4f7d0555",
+      "scores": {
+        "development": {
+          "passed": 3,
+          "total": 3
+        },
+        "holdout": {
+          "passed": 17,
+          "total": 17
+        }
+      },
+      "grade_wall_seconds": 0.0751,
+      "candidate_error": null,
+      "cases": [
+        {
+          "id": "single-success",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "temporary-read",
+          "split": "development",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-write-timeout",
+          "split": "development",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 90,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "permanent-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unlisted-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "attempt-limit",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "inner-retry-owner",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "budget-before-wait",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 80,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "clip-attempt-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 75,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "safe-timeout-deduplicated",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "uncertainty-persists",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 115,
+          "side_effects": 1,
+          "errors": []
+        },
+        {
+          "id": "no-budget",
+          "split": "holdout",
+          "passed": true,
+          "calls": 0,
+          "elapsed_ms": 0,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "throttled-read",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "unsafe-temporary-error",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "created-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "last-2xx-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "bad-gateway",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "gateway-timeout",
+          "split": "holdout",
+          "passed": true,
+          "calls": 2,
+          "elapsed_ms": 30,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "one-attempt-only",
+          "split": "holdout",
+          "passed": true,
+          "calls": 1,
+          "elapsed_ms": 5,
+          "side_effects": 0,
+          "errors": []
+        },
+        {
+          "id": "third-attempt-success",
+          "split": "holdout",
+          "passed": true,
+          "calls": 3,
+          "elapsed_ms": 55,
+          "side_effects": 0,
+          "errors": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "One generation per condition; no significance or generalization claim.",
+    "Skill-context ablation, not an execution of all six workflow stages.",
+    "Deterministic simulated transport, not a real HTTP service or business idempotency test.",
+    "Holdout cases were not sent to generation; they remain public and share one API contract.",
+    "Total model, preparation and maintenance costs are unknown; cost savings cannot be inferred."
+  ]
+}

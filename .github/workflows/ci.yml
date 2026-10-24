@@ -20,6 +20,8 @@ jobs:
         run: python -m pip install -r requirements-ci.txt
       - name: Check skills
         run: python scripts/check_skills.py
+      - name: Self-check retry evaluation
+        run: python -B evals/retry/run.py self-check
       - name: Check local Markdown links
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:

@@ -1,8 +1,8 @@
 # agent-skills
 
-六个小而独立的 AI 开发技能：从一句话需求到代码、验证和 CI 交付。支持仅前端、仅后端或前后端协作。
+以六个小而独立的 AI 开发技能为主线：从一句话需求到代码、验证和 CI 交付。支持仅前端、仅后端或前后端协作。
 
-每个技能只有一份 `SKILL.md`，可以单独使用，也可以由主代理按下面的流程串联。技能说明判断和行动，实际执行复用目标项目的工具；没有额外调度器、运行时或付费服务依赖。
+技能以 `SKILL.md` 为入口，可以单独使用，也可以由主代理按下面的流程串联。技能说明判断和行动，实际执行复用目标项目的工具；使用技能不需要额外调度器、运行时或付费服务。
 
 ## 六个节点
 
@@ -17,9 +17,19 @@
 
 `plain-plan` 保留原有内容，也能单独用于改写难懂的方案。
 
+## 可选的经验回用
+
+[learn-from-task](skills/learn-from-task/SKILL.md)从实际任务与验收证据中提炼或修订经验，附带[经验模板](skills/learn-from-task/assets/experience-template.md)。它不是第七个必经节点；没有值得复用的新证据就不新增经验。
+
+例如：`$learn-from-task 根据本次改动与验收记录修订相关经验，写清适用边界，未验证的结论保持待验证。`
+
+项目提供经验时，主代理在澄清或方案阶段核对适用条件，记录采用、调整或不采用的理由；验收后将实际结果反馈给原经验。新经验保持待验证，不因一次成功自动启用，也不自动改写六个核心技能。没有经验库时继续使用原六节点。
+
+[接口失败与重试试点](evals/retry/README.md)提供可运行的三组上下文对照、故障模拟与行为验收，以及真实模型输出和首轮报告。它用于检验方法，不承诺经验必然提效。
+
 ## 安装与独立使用
 
-在支持 Agent Skills 的工具中，将所需技能目录放入该工具的技能位置。也可以让代理显式读取某个 `SKILL.md`，不用安装全部六个。
+在支持 Agent Skills 的工具中，将所需技能目录放入该工具的技能位置。也可以让代理显式读取某个 `SKILL.md`，不必安装整套技能。
 
 例如在 macOS 的 Codex 中，首次获取后复制到个人技能目录：
 
@@ -92,9 +102,10 @@ $deliver-change 汇总当前改动和验证结果，本次只做本地交付，�
 
 ## 验证范围与来源
 
-GitHub Actions 在 push、PR 和手动触发时执行两项检查，任一失败都会让 CI 失败：
+GitHub Actions 在 push、PR 和手动触发时执行以下检查，任一失败都会让 CI 失败：
 
 - 技能格式：六个节点必须存在，并用 Agent Skills 参考校验器检查所有技能目录的 YAML 元数据、名称和目录匹配等规则。
+- 评测器自检：重试参考实现通过行为验收，已知错误策略被拒绝；不调用模型，不把自检成绩当成模型效果。
 - 文档链接：用 lychee 离线检查 Markdown 中的本地文件链接与标题锚点；外部 HTTP(S) 链接的网络可达性不在本次 CI 范围内。
 
 本地复现：在 Python 3.11+ 的虚拟环境中安装校验依赖，并准备 [lychee v0.24.2](https://github.com/lycheeverse/lychee/releases/tag/lychee-v0.24.2)，然后在仓库根目录运行：
@@ -102,10 +113,11 @@ GitHub Actions 在 push、PR 和手动触发时执行两项检查，任一失败
 ```bash
 python -m pip install -r requirements-ci.txt
 python scripts/check_skills.py
+python -B evals/retry/run.py self-check
 lychee --offline --include-fragments --no-progress './**/*.md'
 ```
 
-[CI 配置](.github/workflows/ci.yml)和[检查脚本](scripts/check_skills.py)都在仓库中。它们检查文件格式与链接，不执行开发任务，也不能证明技能的交付效果。
+[CI 配置](.github/workflows/ci.yml)和[检查脚本](scripts/check_skills.py)都在仓库中。CI 校验文件和评测器，不执行真实开发任务，也不能证明技能的交付效果。
 
 这套技能不绑定模型厂商，但读取技能、执行工具和实际交付效果是三件事，不能据格式兼容承诺任意模型效果相同。新技术栈优先沿用目标项目的版本和工具，不自动安装调研中的候选项目。
 
