@@ -1,0 +1,101 @@
+evals/retry/run.py
+  d873ca9d2551cc53 1-162
+evals/retry/results/2026-10-24/experience.py
+  d873ca9d2551cc53 1-36
+evals/retry/README.md
+  d873ca9d2551cc53 1-67
+README.md
+  d873ca9d2551cc53 3,5,20-29,32,105,108,116,120
+evals/retry/checks.py
+  d873ca9d2551cc53 1-146
+skills/learn-from-task/SKILL.md
+  d873ca9d2551cc53 1-14
+.github/workflows/ci.yml
+  d873ca9d2551cc53 23-24
+evals/retry/results/2026-10-24/baseline.py
+  d873ca9d2551cc53 1-35
+evals/retry/task.md
+  d873ca9d2551cc53 1-28
+skills/learn-from-task/assets/experience-template.md
+  d873ca9d2551cc53 1-28
+evals/retry/results/2026-10-24/workflow.py
+  d873ca9d2551cc53 1-33
+experiences/retry-safety.md
+  d873ca9d2551cc53 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.9",
+  "base_commit_sha": "881097e75f15ea676dea6196a370b2c7444e80c3",
+  "prompts": {
+    "d873ca9d2551cc53": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10493-9bb8-7160-b8eb-1aa332eb739a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "wangguixiang",
+      "messages": [],
+      "total_additions": 635,
+      "total_deletions": 46,
+      "accepted_lines": 594,
+      "overriden_lines": 0,
+      "per_file_stats": {
+        "evals/retry/task.md": {
+          "additions": 28,
+          "accepted_lines": 28
+        },
+        "experiences/retry-safety.md": {
+          "additions": 26,
+          "accepted_lines": 26
+        },
+        "evals/retry/README.md": {
+          "additions": 70,
+          "deletions": 3,
+          "accepted_lines": 67
+        },
+        "evals/retry/results/2026-10-24/workflow.py": {
+          "additions": 52,
+          "deletions": 19,
+          "accepted_lines": 33
+        },
+        "README.md": {
+          "additions": 17,
+          "deletions": 5,
+          "accepted_lines": 17
+        },
+        "skills/learn-from-task/assets/experience-template.md": {
+          "additions": 28,
+          "accepted_lines": 28
+        },
+        "evals/retry/checks.py": {
+          "additions": 146,
+          "accepted_lines": 146
+        },
+        "evals/retry/run.py": {
+          "additions": 166,
+          "deletions": 4,
+          "accepted_lines": 162
+        },
+        "skills/learn-from-task/SKILL.md": {
+          "additions": 14,
+          "accepted_lines": 14
+        },
+        ".github/workflows/ci.yml": {
+          "additions": 2,
+          "accepted_lines": 2
+        },
+        "evals/retry/results/2026-10-24/baseline.py": {
+          "additions": 38,
+          "deletions": 3,
+          "accepted_lines": 35
+        },
+        "evals/retry/results/2026-10-24/experience.py": {
+          "additions": 48,
+          "deletions": 12,
+          "accepted_lines": 36
+        }
+      }
+    }
+  }
+}
