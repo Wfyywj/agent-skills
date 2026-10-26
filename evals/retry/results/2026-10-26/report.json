@@ -1,0 +1,782 @@
+{
+  "schema_version": 2,
+  "experiment": "retry-context-ablation",
+  "suite": "maintenance",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "harness": "Codex collaboration fresh sessions; three simultaneous generations per round; timestamps are observed turn intervals",
+  "trials_per_arm": 3,
+  "manifest_sha256": "66d3ac7230647dd18d0f7137173e2bcd9f582255f6a6fdc6fb224599c49206a0",
+  "conditions": {
+    "baseline": {
+      "independent_generations": 3,
+      "whole_run_success": {
+        "passed": 3,
+        "total": 3,
+        "rate": 1.0
+      },
+      "task_success": {
+        "passed": 6,
+        "total": 6,
+        "rate": 1.0
+      },
+      "case_success": {
+        "passed": 93,
+        "total": 93,
+        "rate": 1.0
+      },
+      "per_task": {
+        "create_order": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "list_orders": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        }
+      },
+      "observed_turn_seconds": {
+        "measured_runs": 3,
+        "mean": 187.588,
+        "minimum": 137.025,
+        "maximum": 213.364
+      },
+      "model_cost_usd": {
+        "measured_runs": 0,
+        "total": null
+      },
+      "runs": [
+        {
+          "candidate_sha256": "23976958758f653ec682eb334e594b2e2d20fb7639ad2020df76fb727112e23b",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0877,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 1,
+          "measurements": {
+            "arm": "baseline",
+            "trial": 1,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:40:06.496095+00:00",
+            "finished_observed_at": "2026-10-26T02:43:39.859619+00:00",
+            "observed_turn_seconds": 213.364,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "394f5763e1f3b5fda1dbf1ba9c1a5f32df2b121cc5fc6da1f4995cfda704e298",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0922,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 2,
+          "measurements": {
+            "arm": "baseline",
+            "trial": 2,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:44:27.639768+00:00",
+            "finished_observed_at": "2026-10-26T02:48:00.014581+00:00",
+            "observed_turn_seconds": 212.375,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "048de379fabc837b3926d26545fd8ed06f166cd2658423006ee17e4c74cf1186",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0851,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 3,
+          "measurements": {
+            "arm": "baseline",
+            "trial": 3,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:48:41.619869+00:00",
+            "finished_observed_at": "2026-10-26T02:50:58.644951+00:00",
+            "observed_turn_seconds": 137.025,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        }
+      ]
+    },
+    "workflow": {
+      "independent_generations": 3,
+      "whole_run_success": {
+        "passed": 3,
+        "total": 3,
+        "rate": 1.0
+      },
+      "task_success": {
+        "passed": 6,
+        "total": 6,
+        "rate": 1.0
+      },
+      "case_success": {
+        "passed": 93,
+        "total": 93,
+        "rate": 1.0
+      },
+      "per_task": {
+        "create_order": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "list_orders": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        }
+      },
+      "observed_turn_seconds": {
+        "measured_runs": 3,
+        "mean": 221.11833333333334,
+        "minimum": 184.784,
+        "maximum": 253.986
+      },
+      "model_cost_usd": {
+        "measured_runs": 0,
+        "total": null
+      },
+      "runs": [
+        {
+          "candidate_sha256": "4a79dc6c82f9ac6abc2bf8eef0282e828513763f1dabefcac7226a3889c6c9ee",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.2453,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 1,
+          "measurements": {
+            "arm": "workflow",
+            "trial": 1,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:40:06.579316+00:00",
+            "finished_observed_at": "2026-10-26T02:43:51.164041+00:00",
+            "observed_turn_seconds": 224.585,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "d4ede2715a4ea9e01a7a554e0d3f4ac939a9a60f3358f939d3ec55c52a030e2c",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0842,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 2,
+          "measurements": {
+            "arm": "workflow",
+            "trial": 2,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:44:27.476007+00:00",
+            "finished_observed_at": "2026-10-26T02:48:41.462063+00:00",
+            "observed_turn_seconds": 253.986,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "fe6a11e4c775a1d8401f8607eb65297b0eef2589928f4b56daff70f6ee3b158d",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0803,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 3,
+          "measurements": {
+            "arm": "workflow",
+            "trial": 3,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:48:41.691561+00:00",
+            "finished_observed_at": "2026-10-26T02:51:46.475770+00:00",
+            "observed_turn_seconds": 184.784,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        }
+      ]
+    },
+    "experience": {
+      "independent_generations": 3,
+      "whole_run_success": {
+        "passed": 3,
+        "total": 3,
+        "rate": 1.0
+      },
+      "task_success": {
+        "passed": 6,
+        "total": 6,
+        "rate": 1.0
+      },
+      "case_success": {
+        "passed": 93,
+        "total": 93,
+        "rate": 1.0
+      },
+      "per_task": {
+        "create_order": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "list_orders": {
+          "passed": 3,
+          "total": 3,
+          "rate": 1.0
+        }
+      },
+      "observed_turn_seconds": {
+        "measured_runs": 3,
+        "mean": 201.60999999999999,
+        "minimum": 137.036,
+        "maximum": 260.736
+      },
+      "model_cost_usd": {
+        "measured_runs": 0,
+        "total": null
+      },
+      "runs": [
+        {
+          "candidate_sha256": "e785bbf5859d70b273b9fbf232a1c44621c23d4c4cde6cf202ca2217cbacf99b",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0805,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 1,
+          "measurements": {
+            "arm": "experience",
+            "trial": 1,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:40:06.662645+00:00",
+            "finished_observed_at": "2026-10-26T02:44:27.398301+00:00",
+            "observed_turn_seconds": 260.736,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "7289bbc5b61e7a93b85c58cd3788b574505e38493a4fb500b260e0bb41bbff1a",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0806,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 2,
+          "measurements": {
+            "arm": "experience",
+            "trial": 2,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:44:27.559111+00:00",
+            "finished_observed_at": "2026-10-26T02:47:54.616737+00:00",
+            "observed_turn_seconds": 207.058,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        },
+        {
+          "candidate_sha256": "e8f45148742637a7d31deac6caa979f658c593c1d060fc245c460d912de051c0",
+          "scores": {
+            "development": {
+              "passed": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "holdout": {
+              "passed": 29,
+              "total": 29,
+              "rate": 1.0
+            }
+          },
+          "tasks_passed": {
+            "create_order": true,
+            "list_orders": true
+          },
+          "grade_wall_seconds": 0.0847,
+          "candidate_error": null,
+          "passed_cases": [
+            "list-two-pages",
+            "list-empty-encoded-cursor",
+            "list-retry-second-page",
+            "list-shared-deadline",
+            "list-partial-http-error",
+            "list-inner-retry",
+            "list-retry-after-budget",
+            "list-retry-after-zero",
+            "list-retry-after-within-budget",
+            "list-repeated-cursor",
+            "list-local-exception",
+            "list-zero-budget",
+            "list-wait-overslept",
+            "list-preserve-duplicate-records",
+            "list-invalid-retry-after",
+            "list-deadline-before-next-page",
+            "list-allowed-scheduler-delay",
+            "list-empty-string-cursor",
+            "create-normal",
+            "create-no-key-timeout",
+            "create-key-timeout-replay",
+            "create-key-expires-during-wait",
+            "create-inner-retry",
+            "create-uncertainty-persists",
+            "create-permanent-error",
+            "create-zero-budget",
+            "create-expired-key-first-call",
+            "create-local-exception",
+            "create-no-key-http-error",
+            "create-one-attempt-limit",
+            "create-safe-http-retry"
+          ],
+          "failures": [],
+          "trial": 3,
+          "measurements": {
+            "arm": "experience",
+            "trial": 3,
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "xhigh",
+            "started_at": "2026-10-26T02:48:41.538282+00:00",
+            "finished_observed_at": "2026-10-26T02:50:58.573894+00:00",
+            "observed_turn_seconds": 137.036,
+            "generation_seconds": null,
+            "input_tokens": null,
+            "output_tokens": null,
+            "model_cost_usd": null,
+            "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+          }
+        }
+      ]
+    }
+  },
+  "shared_overhead": {
+    "experience_preparation_seconds": null,
+    "tool_build_seconds": null,
+    "evaluation_and_maintenance_seconds": null,
+    "cost_usd": null,
+    "environment_probe_seconds": 15.22
+  },
+  "limitations": [
+    "Small descriptive sample; no statistical significance or cross-model claim.",
+    "Two tasks in one candidate are correlated; only fresh generations count as independent runs.",
+    "Skill-context ablation, not execution of the six workflow stages or a real HTTP service.",
+    "Observed turn time includes dispatch, queueing and observer delay; it is not pure generation time.",
+    "Unknown model/overhead cost is null; total-cost savings cannot be inferred."
+  ]
+}

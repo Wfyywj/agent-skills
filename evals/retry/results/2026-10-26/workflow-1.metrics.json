@@ -1,0 +1,14 @@
+{
+  "arm": "workflow",
+  "trial": 1,
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-10-26T02:40:06.579316+00:00",
+  "finished_observed_at": "2026-10-26T02:43:51.164041+00:00",
+  "observed_turn_seconds": 224.585,
+  "generation_seconds": null,
+  "input_tokens": null,
+  "output_tokens": null,
+  "model_cost_usd": null,
+  "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "experiment": "retry-context-ablation",
+  "suite": "maintenance",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "harness": "Codex collaboration fresh sessions; three simultaneous generations per round; timestamps are observed turn intervals",
+  "trials_per_arm": 3,
+  "prepared_at": "2026-10-26T02:38:49.363034+00:00",
+  "source_hashes": {
+    "evals/retry/maintenance/task.md": "e2fa48adf2c7ed6808dbdc2907fffb20bb18707a1d989173bc45eb053d7c148c",
+    "skills/clarify-task/SKILL.md": "c9d66842ebea7594a917aee1df1cf7a252a0e9f8a6f4ecf0b7a7f05ee9dcc59d",
+    "skills/plain-plan/SKILL.md": "428623d496f0fd82664880adc4eaa181879a59bcfb51bc5f0e8cfbf35a3f76a4",
+    "skills/implement-slice/SKILL.md": "4e126a93d6ce71eb9963e8c7a982b0ca19d33389911651a2d0f560863d6808a6",
+    "skills/verify-change/SKILL.md": "26affa7915909758d7c38d59cb809b73c10b96aa680856b81a406d8edea311a3",
+    "skills/review-change/SKILL.md": "18243d6c12322ec21f9c87230db6d275e527ff9ca2b2949949120bf9bf35c135",
+    "skills/deliver-change/SKILL.md": "4cbb6241746d09c2dda6f26a3523ab92a00f8af8a6e5bd2a42e86b52346d29d4",
+    "experiences/retry-safety.md": "fd7b72babc753de264482f28691f0b5a6d286a36de2f57088920013d60467199",
+    "evals/retry/maintenance/checks.py": "12d235975a5e9c1fb4b66c3c38443d7d033b97f4678c697ce4cb4767485f8975",
+    "evals/retry/run.py": "f6bd22b0727a4c76cd68e3f4ecfee9439b8dbac317045d913f5711dd8f6a74ba",
+    "evals/retry/maintenance/starter.py": "e04d3ee317c3a94784e2b51ab48ca308d13a97c1d7aca08975696b84cb8ea670"
+  },
+  "prompt_hashes": {
+    "baseline": "88554ad336abe3354fa7eeb5369fad15230c482d5208df9898dab4f954fba9fd",
+    "workflow": "307a3e2e5fdbdac5979bffe93bba275d4a9ac830d36acd9cb1f05338817c0f7b",
+    "experience": "bb01cf252ccd78ad274267475e3fb4f10a27875d306aba075fb40e376817da2c"
+  },
+  "shared_overhead": {
+    "experience_preparation_seconds": null,
+    "tool_build_seconds": null,
+    "evaluation_and_maintenance_seconds": null,
+    "cost_usd": null,
+    "environment_probe_seconds": 15.22
+  },
+  "schedule": [
+    {
+      "trial": 1,
+      "arm": "baseline"
+    },
+    {
+      "trial": 1,
+      "arm": "workflow"
+    },
+    {
+      "trial": 1,
+      "arm": "experience"
+    },
+    {
+      "trial": 2,
+      "arm": "workflow"
+    },
+    {
+      "trial": 2,
+      "arm": "experience"
+    },
+    {
+      "trial": 2,
+      "arm": "baseline"
+    },
+    {
+      "trial": 3,
+      "arm": "experience"
+    },
+    {
+      "trial": 3,
+      "arm": "baseline"
+    },
+    {
+      "trial": 3,
+      "arm": "workflow"
+    }
+  ],
+  "notes": "Use fresh sessions, no resume or answer repair. Unknown cost is null. Case counts are not independent generation counts.",
+  "collection": {
+    "method": "Nine independent collaboration.spawn_agent calls; gpt-6.1-sol, xhigh, fork_turns=none",
+    "rounds": 3,
+    "max_simultaneous_generations": 3,
+    "order": "manifest.schedule; arms rotate within each round",
+    "protocol": "Only the designated prepared prompt could be read. Candidates were written once in exclusive-create mode to their designated file, with no execution or grading. All nine were collected before scoring.",
+    "postprocessing": "None; copied byte-for-byte from generation output files.",
+    "seed_temperature": "Host defaults, not exposed",
+    "usage_and_invoice": "Per-run tokens and billed cost not exposed by this harness."
+  },
+  "environment_probe": {
+    "interface": "codex-cli 0.153.4",
+    "status": "requested model unsupported for this account",
+    "maintenance_task_sent": false,
+    "elapsed_seconds": 15.22,
+    "token_usage": null,
+    "cost_usd": null,
+    "action": "No model substitution; formal collection uses the same collaboration harness for all arms."
+  }
+}

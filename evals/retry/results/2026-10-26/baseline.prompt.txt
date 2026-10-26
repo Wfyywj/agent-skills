@@ -1,0 +1,81 @@
+# 维护订单客户端的两个现有调用方
+
+下面会附上有缺陷的 `starter.py`。请输出修复后的完整 Python 模块，保留 `list_orders`、`create_order` 的公共签名和返回字段，可以修改内部辅助函数。仅使用标准库；不调用工具、读其他文件、运行验收、提交或访问真实网络。
+
+这不是重写通用重试框架：两个调用方已经被页面和订单提交逻辑使用，需要一起保留正常行为。调用者的 `headers`、`payload` 不能被修改，重试也不能改变请求正文或擅自生成新幂等键。
+
+## 给定接口
+
+- `send(method, path, headers, body, timeout_ms)` 返回 `{"status": 整数, "headers": 字符串字典, "body": 字典}`，或抛 `TimeoutError`。其他异常保持向调用方抛出，不能转换成普通请求失败或自动重试。
+- `now()` 是单调毫秒时钟，起点不一定为零。`wait(ms)` 至少等待这些毫秒，可能有额外调度延迟；等待之后必须重新核对预算和键有效期。
+- 每个公共函数从进入开始共用一个 `budget_ms` 截止时间，分页不能重置预算。每次 `send` 超时取 `min(attempt_timeout_ms, 当前剩余预算)`，没有正预算不发请求。调度延迟可能越过截止时间，此时停止后续调用，不承诺硬实时返回。
+- `max_attempts` 含首次调用，对每个分页请求分别计算；`transport_retries=True` 时每个逻辑请求最多调用一次，不再叠加客户端重试。
+- 只有 429、502、503、504 和 `TimeoutError` 可作为重试候选，其余 HTTP 错误立即停止。每次额外尝试等待一次：通常为 `delay_ms`；429/503 的 `Retry-After` 字段不区分大小写，合法非负整数秒时等待 `max(delay_ms, 秒数*1000)`，否则用 `delay_ms`。无足够预算容纳计划等待及一次正超时调用时不等待、不重试。
+- 数值参数有效：预算和基础延迟非负，单次超时为正，尝试上限至少 1。不要读取回调内部状态或检查验收源码来选择答案。
+
+## 任务一：分页查询
+
+- `GET /orders`，后续页面使用 `cursor` 查询参数；游标可以包含空格、斜杠等字符，必须正确编码。GET 的 `body` 为 `None`，请求头保持调用者原有内容。
+- 此查询可以安全重复。2xx 的 body 为 `{"items": 列表, "next_cursor": 字符串或None}`，按页保留全部 items 及原顺序。空页只要还有游标就继续；不要按 ID 去重。
+- 只有 `next_cursor is None` 才是成功结束，返回 `{"items": 已取得的所有记录, "complete": True, "error": None}`。
+- 中途失败必须保留已取得的记录，`complete=False`；错误为 `"http:<状态码>"`、`"timeout"`、`"budget"` 或 `"cursor"`。重复游标时保留已成功取得的页，停止循环并返回 `"cursor"`。
+- 当页失败后，达到尝试上限或内层已负责重试时保留最后失败原因；尚有尝试机会但计划等待无法安排、或下一页开始前预算耗尽时返回 `"budget"`。不要把部分结果报告为完整列表。
+
+## 任务二：创建订单
+
+- `POST /orders`，body 为原 payload。接口约定 2xx body 中的 `id` 是已确认订单号，返回 `{"outcome": "success", "order_id": id}`。
+- 只有调用方提供非空 `operation_key` 且 `now() < key_valid_until_ms` 时，服务端才保证同一键与同一正文重放不会重复创建。必须在每次额外尝试前重新检查有效期，包括等待之后；过期键不保障重放。
+- 预算充足时先尝试一次；键无效只禁止额外尝试，不禁止首次请求。请求头中的幂等键只能来自本次 `operation_key`：忽略并移除请求副本里的其他旧 `Idempotency-Key`；不修改调用者头，不生成替代键。
+- 无可用键、键过期或内层已重试时，不额外调用创建接口。发生过超时且最终没得到 2xx，返回 `{"outcome": "unknown", "order_id": None}`；后来的 HTTP 错误不能抹去之前可能已经创建成功的事实。其他未成功结果为 `"failed"`，无调用预算也为 failed。
+
+评测仍用确定性故障传输器检查这些接口约定，不连接真实订单服务。不要声称没有执行过的验证已通过。
+
+
+## 现有完整模块
+
+```python
+"""Existing order client to repair. Public signatures and result shapes are stable."""
+
+
+def _request(send, wait, now, method, path, headers, body, budget_ms,
+             attempt_timeout_ms, max_attempts, delay_ms):
+    for attempt in range(max_attempts):
+        headers["X-Attempt"] = str(attempt)
+        try:
+            response = send(method, path, headers, body, attempt_timeout_ms)
+        except TimeoutError:
+            continue
+        if 200 <= response["status"] < 300:
+            return response
+        wait(delay_ms)
+    return None
+
+
+def list_orders(send, wait, now, headers, *, budget_ms=200,
+                attempt_timeout_ms=80, max_attempts=3, delay_ms=10,
+                transport_retries=False):
+    items, path = [], "/orders"
+    while True:
+        response = _request(send, wait, now, "GET", path, headers, None,
+                            budget_ms, attempt_timeout_ms, max_attempts, delay_ms)
+        if response is None:
+            return {"items": [], "complete": True, "error": None}
+        page = response["body"]
+        items.extend(page["items"])
+        if not page["items"] or page["next_cursor"] is None:
+            return {"items": items, "complete": True, "error": None}
+        path = "/orders?cursor=" + page["next_cursor"]
+
+
+def create_order(send, wait, now, headers, payload, *, operation_key=None,
+                 key_valid_until_ms=None, budget_ms=200,
+                 attempt_timeout_ms=80, max_attempts=3, delay_ms=10,
+                 transport_retries=False):
+    headers["Idempotency-Key"] = operation_key or "generated-" + str(now())
+    response = _request(send, wait, now, "POST", "/orders", headers, payload,
+                        budget_ms, attempt_timeout_ms, max_attempts, delay_ms)
+    if response is None:
+        return {"outcome": "failed", "order_id": None}
+    return {"outcome": "success", "order_id": response["body"]["id"]}
+
+```

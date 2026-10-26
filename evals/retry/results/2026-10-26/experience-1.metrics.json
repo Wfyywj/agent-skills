@@ -1,0 +1,14 @@
+{
+  "arm": "experience",
+  "trial": 1,
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-10-26T02:40:06.662645+00:00",
+  "finished_observed_at": "2026-10-26T02:44:27.398301+00:00",
+  "observed_turn_seconds": 260.736,
+  "generation_seconds": null,
+  "input_tokens": null,
+  "output_tokens": null,
+  "model_cost_usd": null,
+  "boundary": "Before dispatch to first observed final response; includes dispatch, queueing, and observer delay."
+}
